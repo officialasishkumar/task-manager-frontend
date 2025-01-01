@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    console.log(process.env.NEXT_PUBLIC_API_URL);
     const router = useRouter();
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -53,6 +52,8 @@ export const AuthProvider = ({ children }) => {
                     },
                 }
             );
+
+            console.log(res);
 
             localStorage.setItem('token', res.data.access_token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`;
