@@ -38,25 +38,37 @@ const Navbar = () => {
                 <div className="hidden md:flex space-x-4">
                     {user ? (
                         <>
-                            <Link className="hover:underline" href="/dashboard">
+                            <Link
+                                href="/dashboard"
+                                className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700"
+                            >
                                 Dashboard
                             </Link>
-                            <Link className="hover:underline" href="/tasks">
+                            <Link
+                                href="/tasks"
+                                className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700"
+                            >
                                 Tasks
                             </Link>
                             <button
                                 onClick={logout}
-                                className="bg-red-500 px-3 py-1 rounded hover:bg-red-600"
+                                className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
                             >
                                 Logout
                             </button>
                         </>
                     ) : (
                         <>
-                            <Link className="hover:underline" href="/login">
+                            <Link
+                                href="/login"
+                                className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-700"
+                            >
                                 Login
                             </Link>
-                            <Link className="hover:underline" href="/signup">
+                            <Link
+                                href="/signup"
+                                className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
+                            >
                                 Sign Up
                             </Link>
                         </>
