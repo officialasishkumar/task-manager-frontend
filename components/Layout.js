@@ -1,4 +1,3 @@
-// components/Layout.js
 import Navbar from './Navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

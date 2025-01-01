@@ -1,4 +1,3 @@
-// pages/_app.js
 import { AuthProvider } from '../context/AuthContext';
 import Layout from '../components/Layout';
 import 'tailwindcss/tailwind.css';

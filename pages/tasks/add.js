@@ -1,4 +1,3 @@
-// pages/tasks/add.js
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import ProtectedRoute from '../../components/ProtectedRoute';

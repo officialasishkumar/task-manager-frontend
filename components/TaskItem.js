@@ -1,4 +1,3 @@
-// components/TaskItem.js
 import Link from 'next/link';
 
 const TaskItem = ({ task, onDelete, onToggleComplete }) => {
