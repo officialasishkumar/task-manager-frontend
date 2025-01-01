@@ -6,6 +6,7 @@ import axios from 'axios';
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
     const [summary, setSummary] = useState({ completed: 0, pending: 0 });
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchSummary = async () => {
@@ -21,6 +22,8 @@ const Dashboard = () => {
                 setSummary(res.data);
             } catch (error) {
                 console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -28,6 +31,14 @@ const Dashboard = () => {
             fetchSummary();
         }
     }, [user]);
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="mt-10">

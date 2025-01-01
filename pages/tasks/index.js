@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 const Tasks = () => {
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const fetchTasks = async () => {
         try {
@@ -21,6 +22,8 @@ const Tasks = () => {
         } catch (error) {
             console.error(error);
             toast.error('Failed to fetch tasks');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -65,6 +68,14 @@ const Tasks = () => {
             toast.error('Failed to update task');
         }
     };
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+            </div>
+        );
+    }
 
     return (
         <div className="mt-10">
