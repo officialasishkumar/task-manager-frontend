@@ -35,34 +35,83 @@ const Navbar = () => {
                         ></path>
                     </svg>
                 </button>
-                <div className={`md:flex ${isMenuOpen ? '' : 'hidden'} flex-col md:flex-row`}>
+                <div className="hidden md:flex space-x-4">
                     {user ? (
                         <>
-                            <Link className="mr-4 mt-2 md:mt-0" href="/dashboard">
+                            <Link className="hover:underline" href="/dashboard">
                                 Dashboard
                             </Link>
-                            <Link className="mr-4 mt-2 md:mt-0" href="/tasks">
+                            <Link className="hover:underline" href="/tasks">
                                 Tasks
                             </Link>
                             <button
                                 onClick={logout}
-                                className="bg-red-500 px-3 py-1 rounded mt-2 md:mt-0"
+                                className="bg-red-500 px-3 py-1 rounded hover:bg-red-600"
                             >
                                 Logout
                             </button>
                         </>
                     ) : (
                         <>
-                            <Link className="mr-4 mt-2 md:mt-0" href="/login">
+                            <Link className="hover:underline" href="/login">
                                 Login
                             </Link>
-                            <Link href="/signup">
+                            <Link className="hover:underline" href="/signup">
                                 Sign Up
                             </Link>
                         </>
                     )}
                 </div>
             </div>
+            {/* Dropdown for Mobile */}
+            {isMenuOpen && (
+                <div className="md:hidden mt-2 bg-blue-500 rounded shadow-lg">
+                    {user ? (
+                        <>
+                            <Link
+                                className="block px-4 py-2 hover:bg-blue-600"
+                                href="/dashboard"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Dashboard
+                            </Link>
+                            <Link
+                                className="block px-4 py-2 hover:bg-blue-600"
+                                href="/tasks"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Tasks
+                            </Link>
+                            <button
+                                onClick={() => {
+                                    logout();
+                                    setIsMenuOpen(false);
+                                }}
+                                className="block w-full text-left px-4 py-2 bg-red-500 hover:bg-red-600"
+                            >
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link
+                                className="block px-4 py-2 hover:bg-blue-600"
+                                href="/login"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                className="block px-4 py-2 hover:bg-blue-600"
+                                href="/signup"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Sign Up
+                            </Link>
+                        </>
+                    )}
+                </div>
+            )}
         </nav>
     );
 };
