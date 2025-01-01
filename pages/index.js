@@ -16,7 +16,7 @@ const Home = () => {
         }
     }, [user, loading, router]);
 
-    return null; // Or a loading spinner
+    return null;
 };
 
 export default Home;

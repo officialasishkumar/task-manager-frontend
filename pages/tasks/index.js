@@ -5,11 +5,14 @@ import axios from 'axios';
 import TaskItem from '../../components/TaskItem';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 const Tasks = () => {
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
+    const { filter } = router.query;
 
     const fetchTasks = async () => {
         try {
@@ -18,7 +21,16 @@ const Tasks = () => {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             });
-            setTasks(res.data);
+            let filteredTasks = res.data;
+
+            // Filter tasks based on query parameter
+            if (filter === 'completed') {
+                filteredTasks = filteredTasks.filter((task) => task.completed);
+            } else if (filter === 'pending') {
+                filteredTasks = filteredTasks.filter((task) => !task.completed);
+            }
+
+            setTasks(filteredTasks);
         } catch (error) {
             console.error(error);
             toast.error('Failed to fetch tasks');
@@ -31,7 +43,7 @@ const Tasks = () => {
         if (user) {
             fetchTasks();
         }
-    }, [user]);
+    }, [user, filter]);
 
     const deleteTask = async (id) => {
         try {
@@ -50,7 +62,7 @@ const Tasks = () => {
 
     const toggleComplete = async (id, completed) => {
         try {
-            const res = await axios.put(
+            await axios.put(
                 `${process.env.NEXT_PUBLIC_API_URL}/tasks/${id}`,
                 { completed },
                 {
